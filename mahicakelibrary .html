@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahi Cake Library</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins, sans-serif;
+background:linear-gradient(to right,#fffaf7,#ffe9ec);
+color:#333;
+scroll-behavior:smooth;
+}
+
+/* LOADER */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.cake-loader{
+font-size:60px;
+animation:bounce 1s infinite alternate;
+}
+@keyframes bounce{
+from{transform:translateY(0);}
+to{transform:translateY(-20px);}
+}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:white;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+/* GOLD LOGO */
+.gold{
+background:linear-gradient(45deg,#d4af37,#ffd700,#fff3b0);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+font-size:28px;
+font-weight:700;
+}
+.tagline{
+font-size:12px;
+letter-spacing:2px;
+color:#888;
+}
+
+.seal{
+padding:6px 14px;
+border-radius:50px;
+background:linear-gradient(45deg,#d4af37,#ffd700);
+color:#000;
+font-weight:600;
+margin-left:15px;
+}
+
+nav a{
+margin-left:20px;
+text-decoration:none;
+color:#444;
+font-weight:500;
+}
+
+/* SLIDER */
+.slider{
+height:340px;
+overflow:hidden;
+position:relative;
+}
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:1s;
+}
+.slide.active{opacity:1;}
+
+.section{
+padding:70px 20px;
+text-align:center;
+animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* ABOUT */
+.about-container{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+justify-content:center;
+gap:40px;
+}
+.about-image img{
+width:320px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* GALLERY */
+.gallery img{
+width:260px;
+margin:12px;
+border-radius:16px;
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+transition:.4s;
+}
+.gallery img:hover{transform:scale(1.05);}
+
+/* TRUST BADGES */
+.badges{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+.badge{
+background:linear-gradient(135deg,#fff,#ffe6ea);
+padding:20px;
+border-radius:16px;
+width:180px;
+box-shadow:0 6px 18px rgba(0,0,0,0.12);
+position:relative;
+overflow:hidden;
+}
+.badge::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+animation:glow 4s infinite;
+}
+@keyframes glow{
+0%{left:-50%;}
+100%{left:150%;}
+}
+
+/* COUNTER */
+.counter{
+font-size:48px;
+font-weight:700;
+color:#ff4d6d;
+}
+
+/* FORM */
+form{
+max-width:420px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+input,select,textarea{
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+button{
+padding:12px;
+border:none;
+border-radius:8px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+.price{font-weight:bold;color:#ff4d6d;font-size:18px;}
+
+/* FLOAT BUTTONS */
+.call-btn,.wa-btn,.insta-btn{
+position:fixed;
+padding:14px;
+border-radius:50%;
+color:white;
+font-size:20px;
+text-decoration:none;
+}
+.call-btn{right:20px;bottom:90px;background:#25d366;}
+.wa-btn{right:20px;bottom:20px;background:#128c7e;}
+.insta-btn{left:20px;bottom:20px;background:#E1306C;}
+
+footer{
+background:#ff4d6d;
+color:white;
+padding:25px;
+text-align:center;
+}
+.google-card{
+display:block;
+max-width:600px;
+margin:30px auto;
+padding:20px;
+background:white;
+border-radius:16px;
+box-shadow:0 6px 20px rgba(0,0,0,0.15);
+text-decoration:none;
+color:#333;
+transition:0.3s;
+}
+
+.google-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.google-content{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.google-content img{
+width:60px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<div class="cake-loader">🎂</div>
+<p>Preparing Sweet Happiness...</p>
+</div>
+
+<header>
+<div>
+<span class="gold">Mahi Cake Library</span>
+<span class="seal">Since 2022</span>
+<div class="tagline">Luxury Homemade Cakes</div>
+</div>
+<nav>
+<a href="#gallery">Cakes</a>
+<a href="#order">Order</a>
+</nav>
+</header>
+
+<!-- SLIDER -->
+<div class="slider">
+<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1578985545062-69928b1d9587');"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1559628233-100c798642d4');"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1605475129013-3a9b1f7d26a8');"></div>
+</div>
+
+<section class="section">
+<div class="about-container">
+<div>
+<h2>Homemade Fresh Cakes</h2>
+<p>Freshly baked with hygiene & love ❤️</p>
+</div>
+<div class="about-image">
+<img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75">
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="about-container">
+<div>
+<h2>with proper machine</h2>
+<p>taste and quaity</p>
+</div>
+<div class="about-image">
+<img src="https://media.istockphoto.com/id/1294924487/photo/anonymous-young-woman-making-whipped-cream-on-a-kitchen-counter-at-home.jpg?s=612x612&w=0&k=20&c=NwzjH7XIEmVw0wc9GdfpbRqiTpirBCZ7jGqc4MxMM0I=">
+</div>
+</div>
+</section>
+<section class="section" id="gallery">
+<h2>Our Cakes</h2>
+<div class="gallery">
+<img src="https://lh3.googleusercontent.com/p/AF1QipNSK8Ks6N02RGE_rjEeJzA6JwEU55QacWodBc-W=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipM3_LZ-5aT0-uu459XwW_T2QlKBnW3zfstzMWvk=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipP4D9AySRW8fpPFMegMCTjY4Dt6KlQ4P0bC-NkF=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipNp8R_Hj47ENiIv6w2fwmEqlFVCtPxdV0ZY4XFf=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipP1wdBDXceLYztS3E6igoEON6Xs5gWfMgOzZY9P=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipNWyKGoz3Fx3lq9KbVdJQtXOG4Dzr4WaQzA2aJ6=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipOXPGgfwuIz661m5mo_RpZbWbu6obmrK1zWRpHd=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipMRxTNG59HT1K5uxCF570kLXsYd6IBrRJn69JvL=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipNF0RmXESbP0RY01XP9FdPpxyaWjSR1NoecXiiM=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipOQ0xNNhGqmNrDk0mSvk1qQxCPulL2j_-kAQtCu=s680-w680-h510-rw">
+<img src="https://lh3.googleusercontent.com/p/AF1QipPXnnxLI_B-jxotrSQ0PAaVHJMWlHnjjDob0533=s680-w680-h510-rw">
+<div class="about-container">
+<div>
+<h2>Customised cake</h2>
+<p>According to your need </p>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2 >Trusted Quality</h2>
+<div class="badges">
+<div class="badge">⭐ 5 Star Rated</div>
+<div class="badge">👍 Always Suggested</div>
+<div class="badge">✔ Approved Quality</div>
+<div class="badge">🏠 100% Homemade</div>
+<div class="badge">🛡 FSSAI Approved</div>
+</div>
+</section>
+
+<section class="section" style="">
+<h2>Know More About Us</h2>
+
+<a href="https://share.google/37xlEBxgEJgEmcIN3" target="_blank" class="google-card">
+
+<div class="google-content">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
+<div>
+<h3>View Our Google Business Page</h3>
+<p>See reviews, photos, directions & customer experiences</p>
+</div>
+
+</div>
+
+</a>
+</section>
+
+<section class="section">
+<h2>Our Happy Customers</h2>
+<div class="counter" id="counter">0+</div>
+<p>Happy Customers Served</p>
+</section>
+
+<section class="section" id="order">
+<h2>Order Your Cake</h2>
+<form >
+
+<select id="flavour" onchange="updateOptions()">
+<option>Chocolate</option>
+<option>Strawberry</option>
+<option>Butterscotch</option>
+<option>Blueberry</option>
+<option>Mix Fruit</option>
+<option>Rasmalai</option>
+</select>
+
+<select id="size" onchange="calculatePrice()">
+<option value="200">250 g</option>
+<option value="300">500 g</option>
+<option value="600">1 kg</option>
+</select>
+
+<div class="price">Total: ₹ <span id="price">200</span></div>
+
+
+
+<button type="submit">Order on WhatsApp</button>
+</form>
+</section>
+
+<section class="section">
+<h2>Visit Us</h2>
+
+<iframe
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3717.911923919318!2d78.5800405!3d21.274953699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd459062876e021%3A0x200edb5067133c8f!2sMahi%20Cake%20Library!5e0!3m2!1sen!2sin!4v1772285276887!5m2!1sen!2sin" >
+width="95%"
+height="520"
+style="border:0;border-radius:15px;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+<p>📍 Tap map for directions</p>
+
+</section>
+<footer>
+📞 7972476258 | Katol 
+<br>© Mahi Cake Library
+</footer>
+
+<a href="tel:7972476258" class="call-btn">📞</a>
+<a href="https://wa.me/917972476258" class="wa-btn">💬</a>
+
+
+<script>
+// loader
+window.addEventListener("load",()=>{
+document.getElementById("loader").style.display="none";
+});
+
+// slider
+let slides=document.querySelectorAll(".slide");
+let i=0;
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},3500);
+
+// counter
+let count=0;
+let interval=setInterval(()=>{
+count+=5;
+document.getElementById("counter").innerText=count+"+";
+if(count>=500) clearInterval(interval);
+},20);
+
+// price logic
+function updateOptions(){
+let flavour=document.getElementById("flavour").value;
+let size=document.getElementById("size");
+if(flavour==="Rasmalai"){
+size.innerHTML=`
+<option value="450">500 g</option>
+<option value="900">1 kg</option>
+<option value="1350">1.5 kg</option>`;
+}else{
+size.innerHTML=`
+<option value="200">250 g</option>
+<option value="300">500 g</option>
+<option value="600">1 kg</option>`;
+}
+calculatePrice();
+}
+function calculatePrice(){
+document.getElementById("price").innerText=
+document.getElementById("size").value;
+}
+
+// whatsapp
+function sendWhatsApp(){
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let flavour=document.getElementById("flavour").value;
+let size=document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
+let msg=document.getElementById("msg").value;
+
+let text=`Order from Mahi Cake Library:
+Name: ${name}
+Phone: ${phone}
+Cake: ${flavour}
+Size: ${size}
+Details: ${msg}`;
+
+window.open("https://wa.me/917972476258?text="+encodeURIComponent(text));
+}
+</script>
+
+</body>
+</html>
